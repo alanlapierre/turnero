@@ -1,0 +1,25 @@
+# ingress-simple.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: turnero-ingress
+  namespace: turnero
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /ping
+            pathType: Prefix
+            backend:
+              service:
+                name: turnero-svc
+                port:
+                  number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: turnero-svc
+                port:
+                  number: 80

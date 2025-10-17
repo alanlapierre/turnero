@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: turnero-config
+  namespace: turnero
+data:
+  MONGODB_URI: "mongodb://mongo:27017/turnero"
