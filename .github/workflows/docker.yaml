@@ -4,8 +4,8 @@ on:
   push:
     branches: [ "master" ]
   # y/o build por tag
-  tags:
-    - "v*.*.*"
+    tags:
+      - "v*.*.*"
 
 jobs:
   docker:
