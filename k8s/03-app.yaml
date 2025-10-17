@@ -13,9 +13,11 @@ spec:
       labels:
         app: turnero
     spec:
+      imagePullSecrets:
+        - name: ghcr-pull
       containers:
-        - name: turnero
-          image: turnero-app:1.0.3
+        - name: app
+          image: ghcr.io/alanlapierre/turnero:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
