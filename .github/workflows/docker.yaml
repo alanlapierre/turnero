@@ -34,9 +34,12 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository }}
           tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
-            type=semver,pattern={{version}},enable={{is_tag}}
-            type=semver,pattern={{major}}.{{minor}},enable={{is_tag}}
+            # latest SOLO si el evento es un push al branch por defecto (ej. main)
+            type=raw,value=latest,enable=${{ github.ref_type == 'branch' && github.ref_name == github.event.repository.default_branch }}
+
+            # versiones SOLO si el evento es un tag (ej. refs/tags/v1.2.3)
+            type=semver,pattern={{version}},enable=${{ github.ref_type == 'tag' }}
+            type=semver,pattern={{major}}.{{minor}},enable=${{ github.ref_type == 'tag' }}
 
       - name: Build and push
         uses: docker/build-push-action@v6
