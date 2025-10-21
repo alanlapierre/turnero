@@ -1,21 +1,22 @@
 <configuration>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="net.logstash.logback.encoder.LoggingEventEncoder">
-            <provider class="net.logstash.logback.composite.loggingevent.LoggingEventJsonProviders">
-                <timestamp />
-                <message />
-                <loggerName />
-                <threadName />
-                <logLevel />
-                <mdc /> <!-- incluye MDC: traceId/spanId -->
-                <arguments />
-                <stackTrace />
-            </provider>
-        </encoder>
-    </appender>
+<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+        <providers>
+            <timestamp/>
+            <level/>
+            <loggerName/>
+            <threadName/>
+            <message/>
+            <mdc/>         <!-- acá van traceId/spanId si usás OTel -->
+            <arguments/>
+            <stackTrace/>
+        </providers>
+    </encoder>
+</appender>
 
-    <root level="INFO">
-        <appender-ref ref="STDOUT" />
-    </root>
+<root level="INFO">
+    <appender-ref ref="STDOUT"/>
+</root>
 </configuration>
+
 
