@@ -9,6 +9,8 @@ import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
 import io.micronaut.serde.annotation.Serdeable
 import jakarta.validation.constraints.NotBlank
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import java.time.Instant
 
 @Serdeable
@@ -29,11 +31,17 @@ data class AppointmentResponse(val id: String, val employeeId: String, val clien
 
 @Controller("/appointments")
 class AppointmentController(
+
+    private val logger: Logger = LoggerFactory.getLogger(AppointmentController::class.java),
+
     private val schedule: ScheduleAppointmentUseCase,
     private val repo: AppointmentRepository
 ) {
     @Post
     fun create(@Body req: ScheduleAppointmentRequest): HttpResponse<CreateAppointmentResponse> {
+
+        logger.info("Iniciando Create")
+
         val cmd = ScheduleAppointmentCommand(
             employeeId = req.employeeId,
             clientId = req.clientId,
@@ -45,8 +53,11 @@ class AppointmentController(
     }
 
     @Get("/{id}")
-    fun get(@PathVariable id: String): HttpResponse<AppointmentResponse> =
-        repo.findById(AppointmentId(id))?.let {
+    fun get(@PathVariable id: String): HttpResponse<AppointmentResponse> {
+
+        logger.info("Iniciando Get By Id")
+
+        return repo.findById(AppointmentId(id))?.let {
             HttpResponse.ok(
                 AppointmentResponse(
                     id = it.id.value,
@@ -57,4 +68,6 @@ class AppointmentController(
                 )
             )
         } ?: HttpResponse.notFound()
+
+    }
 }
