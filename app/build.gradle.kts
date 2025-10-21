@@ -32,6 +32,13 @@ dependencies {
     runtimeOnly("ch.qos.logback:logback-classic")
 
     testImplementation("io.micronaut:micronaut-http-client")
+
+    // Logging JSON (Logback + encoder)
+    implementation("net.logstash.logback:logstash-logback-encoder:7.4")
+
+    // Tracing (para MDC traceId/spanId y OTel)
+    implementation("io.micronaut.tracing:micronaut-tracing-opentelemetry")
+    implementation("io.opentelemetry:opentelemetry-exporter-otlp") // para traces (OTLP)
 }
 
 application {
