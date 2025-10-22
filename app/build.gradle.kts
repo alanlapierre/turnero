@@ -14,6 +14,7 @@ micronaut {
 }
 
 dependencies {
+    kapt("io.micronaut.serde:micronaut-serde-processor")
     implementation(kotlin("reflect"))
 
     implementation(project(":application"))
@@ -25,15 +26,9 @@ dependencies {
     implementation("jakarta.annotation:jakarta.annotation-api")
 
     implementation("io.micronaut.serde:micronaut-serde-jackson")
-    kapt("io.micronaut.serde:micronaut-serde-processor")
 
     // MongoDB (driver síncrono integrado con Micronaut)
     implementation("io.micronaut.mongodb:micronaut-mongo-sync")
-
-    // (opcional pero útil)
-    runtimeOnly("ch.qos.logback:logback-classic")
-
-    testImplementation("io.micronaut:micronaut-http-client")
 
     // Logging JSON (Logback + encoder)
     implementation("net.logstash.logback:logstash-logback-encoder:7.4")
@@ -42,6 +37,14 @@ dependencies {
     implementation("io.micronaut.tracing:micronaut-tracing-opentelemetry")
     implementation("io.opentelemetry:opentelemetry-exporter-otlp") // para traces (OTLP)
 
+    //Micrometer para Metricas
+    implementation("io.micronaut.micrometer:micronaut-micrometer-core")
+    implementation("io.micronaut.micrometer:micronaut-micrometer-registry-prometheus")
+    implementation("io.micronaut:micronaut-management")
+
+    runtimeOnly("ch.qos.logback:logback-classic")
+
+    testImplementation("io.micronaut:micronaut-http-client")
 }
 
 application {
