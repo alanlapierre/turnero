@@ -31,12 +31,12 @@ data class AppointmentResponse(val id: String, val employeeId: String, val clien
 
 @Controller("/appointments")
 class AppointmentController(
-
-    private val logger: Logger = LoggerFactory.getLogger(AppointmentController::class.java),
-
     private val schedule: ScheduleAppointmentUseCase,
     private val repo: AppointmentRepository
 ) {
+
+    private val logger: Logger = LoggerFactory.getLogger(AppointmentController::class.java)
+
     @Post
     fun create(@Body req: ScheduleAppointmentRequest): HttpResponse<CreateAppointmentResponse> {
 
