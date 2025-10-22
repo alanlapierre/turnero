@@ -14,6 +14,8 @@ micronaut {
 }
 
 dependencies {
+    implementation(kotlin("reflect"))
+
     implementation(project(":application"))
     implementation(project(":domain"))
 
@@ -39,6 +41,7 @@ dependencies {
     // Tracing (para MDC traceId/spanId y OTel)
     implementation("io.micronaut.tracing:micronaut-tracing-opentelemetry")
     implementation("io.opentelemetry:opentelemetry-exporter-otlp") // para traces (OTLP)
+
 }
 
 application {
