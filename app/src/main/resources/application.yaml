@@ -1,14 +1,18 @@
-micronaut:
-    application:
-      name: turnero
-
-# Puerto de la app
-server:
-  port: 8080
-
-# URI de Mongo: por defecto apunta a localhost (útil para correr sin Docker)
+# URI de Mongo: por defecto apunta a localhost (ï¿½til para correr sin Docker)
 mongodb:
   uri: ${MONGODB_URI:`mongodb://root:root@localhost:27017/turnero?authSource=admin`}
+
+micronaut:
+  application:
+    name: turnero
+  server:
+    port: 8080
+  metrics:
+    enabled: true
+    export:
+      prometheus:
+        enabled: true
+        descriptions: true
 
 endpoints:
   all:
@@ -17,9 +21,7 @@ endpoints:
   prometheus:
     enabled: true
     sensitive: false
+  beans:
+    enabled: true
+    sensitive: false
 
-micrometer:
-  enabled: true
-  export:
-    prometheus:
-      enabled: true
